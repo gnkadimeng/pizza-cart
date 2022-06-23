@@ -6,72 +6,93 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/alpinejs" defer></script>
-   
+
     <title>Document</title>
 </head>
+<script src="https://unpkg.com/alpinejs" defer></script>
 <script src="https://kit.fontawesome.com/8d9a2a9f22.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
 <link rel="stylesheet" href="style.css">
+<!-- <script src="script.js"></script> -->
 
 
-<header><h2>Perfect Pizza</h2>
-    <div class="cart-box">
-        <div class="cart-icon"><i class="fa-solid fa-cart-arrow-down fa-2x non-empty"></i></div>
-        <div class="whole-cart-window hide">
-            <h4>Pizza Cart</h4>
-            <div class="cart-wrapper"></div>
-            <div class="cart-item">
-                <img src="pizza-size.png" alt="">
-                <div class="product-info">
-                    <h4 class="product-name">Large Pizza</h4>
-                    <h2 class="product-price">R 129.00</h2>
-                    <h2 class="product-offer">50%</h2>
-                    <p class="product-quantity">Qnt: <input value="1" name=""> 
-                    <p class="product-remove">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                        <span class="remove">Remove</span>
+<header>
+    <h2>Perfect Pizza</h2>
+    <div class="container" x-data="{ShowCart: true, LpTotal:0, MlTotal:0, SlTotal:0, CartTotal: 0, Lpqty:0 }">
+        <div class="cart-box" x-show="ShowCart">
+            <div class="cart-icon"><a href="#" x-on:click="ShowCart=false"><i class="fa-solid fa-cart-arrow-down fa-2x "></i></div></a>
+                
+            <div class="whole-cart-window ">
+                <h4>Pizza Cart</h4>
+                <div class="cart-wrapper"></div>
+                <div class="cart-item">
+                    <img src="" alt="">
+                    <div class="product-info">
+                        <h4 class="product-name">Large Pizza</h4>
+                        <span x-text="LpTotal" class="product-price"></span>
 
-                    </p>
-                </p>
+                        <p>Qnt: <input x-on:click="Lpqty +=1" class="product-quantity" value="" name="">
+                        <button x-on:click="LpTotal -= 179.99" class="product-remove">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                            <span class="remove">Remove</span>
+
+                        </button>
+    
+                        <button x-on:click="LpTotal += 179.99" class="product-remove">
+                            <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                            <span class="remove">Add</span>
+
+                        </button>
+                        </p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="cart-item">
-                <img src="pizza-size.png" alt="">
-                <div class="product-info">
-                    <h3 class="product-name">Large Pizza</h3>
-                    <h2 class="product-price">R 129.00</h2>
-                    <h2 class="product-offer">50%</h2>
-                    <p class="product-quantity">Qnt: <input value="1" name=""> 
-                    <p class="product-remove">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                        <span class="remove">Remove</span>
+                <div class="cart-item">
+                    <img src="" alt="">
+                    <div class="product-info">
+                        <h3 class="product-name">Medium Pizza</h3>
+                        <span x-text="MlTotal" class="product-price">R129.00</span>
+                        <p>Qnt: <input class="product-quantity" value="1" name="">
+                        <button x-on:click="MlTotal -= 129.99" class="product-remove">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                            <span class="remove">Remove</span>
 
-                    </p>
-                </p>
+                        </button>
+                        <button x-on:click="MlTotal += 129.99" class="product-remove">
+                            <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                            <span class="remove">Add</span>
+
+                        </button>
+
+                        </p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="cart-item">
-                <img src="pizza-size.png" alt="">
-                <div class="product-info">
-                    <h3 class="product-name">Large Pizza</h3>
-                    <h2 class="product-price">R 129.00</h2>
-                    <h2 class="product-offer">50%</h2>
-                    <p class="product-quantity">Qnt: <input value="1" name=""> 
-                    <p class="product-remove">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                        <span class="remove">Remove</span>
+                <div class="cart-item">
+                    <img src="" alt="">
+                    <div class="product-info">
+                        <h3 class="product-name">Small Pizza</h3>
+                        <span x-text="SlTotal" class="product-price">R 129.00</span>
+                        <p>Qnt: <input class="product-quantity" value="1" name="">
+                        <button x-on:click="SlTotal -= 79.99"class="product-remove">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                            <span class="remove">Remove</span>
 
-                    </p>
-                </p>
+                        </button>
+                        <button x-on:click="SlTotal += 79.99" class="product-remove">
+                            <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                            <span class="remove">Add</span>
+
+                        </button>
+                        </p>
+                    </div>
                 </div>
-            </div>
 
+            </div>
+            <div x-text="CartTotal" class="subtotal">Subtotal: R0.00</div>
+            <div class="check-out">Payment</div>
+            <div class="view-cart">View Cart</div>
         </div>
-        <div class="subtotal">Subtotal: R0.00</div>
-        <div class="check-out">Payment</div>
-        <div class="view-cart">View Cart</div>
     </div>
 </header>
 
@@ -79,25 +100,35 @@
 <body>
 
 
-    <div class="container">
+    <div class="container" >
         <div id="myDIV" class="pizza-block">
             <div class="pizza pizza-fill">
                 <div><img class="med-img" src="pizza-size.png" alt=""></div> <strong>Medium
                     Pizza</strong><br><br><strong>R98.99</strong><br><br>large margeritha pizza with 3 toppings
-                max. 3 meat toppings max. 3 or less other toppings.  <br> <br> <img align="right"class="toppings" src="coca_cola_PNG8913.png" alt=""> <div class="promo">FREE 2l Diet Coke.</div> <br> <button class="button" type="button">Order Now</button>
+                max. 3 meat toppings max. 3 or less other toppings. <br> <br> <img align="right" class="toppings"
+                    src="coca_cola_PNG8913.png" alt="">
+                <div class="promo">FREE 2l Diet Coke.</div> <br> 
+                <button class="cart-icon"><a href="#" x-on:click="ShowCart=true"><i class="fa-solid fa-basket-shopping fa-4x "></i></button></a>
             </div>
 
             <div class="pizza pizza-fill">
                 <div><img class="large-img" src="pizza-size.png" alt=""></div> <strong>Large
                     Pizza</strong><br><br><strong>R148.99</strong><br><br>large margeritha pizza with 3 toppings
-                max. 3 meat toppings max. 3 or less other toppings. <br> <br> <img align="right" class="toppings" src="coca_cola_PNG8913.png" alt=""> <div class="promo">FREE 2l Diet Coke.</div> <br> <button class="button" type="button">Order Now</button>
+                max. 3 meat toppings max. 3 or less other toppings. <br> <br> <img align="right" class="toppings"
+                    src="coca_cola_PNG8913.png" alt="">
+                <div class="promo">FREE 2l Diet Coke.</div> <br> 
+                <button class="cart-icon"><a href="#" x-on:click="ShowCart=true"><i class="fa-solid fa-basket-shopping fa-4x "></i></button></a>
             </div>
 
             <div class="pizza pizza-fill">
-                <div><img class="small-img" src="https://debonairspizza.co.za/images/menu/menu-pizza-2-icon.png" alt=""></div> <strong>Small
+                <div><img class="small-img" src="https://debonairspizza.co.za/images/menu/menu-pizza-2-icon.png" alt="">
+                </div> <strong>Small
                     Pizza </strong><br><br><strong>R78.99</strong><br><br>large margeritha pizza with 3 toppings
-                mall pizza with 3 toppings 1 meat topping. 3 or less other toppings. <br> <br> <br> <img align="right" class="toppings" src="coca_cola_PNG8913.png" alt=""> <div class="promo">FREE 440ml Diet Coke.</div> <br> <button class="button" type="button">Order Now</button>
-                
+                mall pizza with 3 toppings 1 meat topping. 3 or less other toppings. <br> <br> <br> <img align="right"
+                    class="toppings" src="coca_cola_PNG8913.png" alt="">
+                <div class="promo">FREE 440ml Diet Coke.</div> <br> 
+                <button x-on:click="SlTotal += 79.99" class="cart-icon"><a href="#" ><i class="fa-solid fa-basket-shopping fa-4x "></i></button></a>
+
             </div>
         </div>
     </div>
