@@ -14,14 +14,30 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
 <link rel="stylesheet" href="style.css">
 <!-- <script src="script.js"></script> -->
+<script>
+    function ready(value) {
+    if ( value == total) {
+        console.log("Payment Accepted")
+    }
+    else  {
+        console.log("Please enter the correct amount to proceed with your order")
+    }
+
+    document.getElementById('value').value = value
+    document.getElementById('total').total = total
+    
+}
+</script>
 
 
 <header>
     <h2>Perfect Pizza</h2>
-    <div class="container" x-data="{ShowCart: true, LpTotal:0, MlTotal:0, SlTotal:0, CartTotal: 0, Lpqty:0 }">
+    <div class="container"
+        x-data="{ShowCart: true, LpTotal:0, MlTotal:0, SlTotal:0, CartTotal: 0, Lpqty:0, Mpqty:0, Spqty:0, pay:0}">
         <div class="cart-box" x-show="ShowCart">
-            <div class="cart-icon"><a href="#" x-on:click="ShowCart=false"><i class="fa-solid fa-cart-arrow-down fa-2x "></i></div></a>
-                
+            <div class="cart-icon"><a href="#" x-on:click="ShowCart=false"><i
+                        class="fa-solid fa-cart-arrow-down fa-2x "></i></div></a>
+
             <div class="whole-cart-window ">
                 <h4>Pizza Cart</h4>
                 <div class="cart-wrapper"></div>
@@ -29,70 +45,100 @@
                     <img src="" alt="">
                     <div class="product-info">
                         <h4 class="product-name">Large Pizza</h4>
-                        <span x-text="LpTotal" class="product-price"></span>
+                        <h4> <span x-text="LpTotal" class="product-price"></span></h4>
 
-                        <p>Qnt: <input x-on:click="Lpqty +=1" class="product-quantity" value="" name="">
-                        <button x-on:click="LpTotal -= 179.99" class="product-remove">
+                        <!-- <div>Qnt: <input x-on:click="Lpqty +=1" class="product-quantity" value="" name=""> -->
+                        <button x-on:click="LpTotal -= 179.99; Lpqty-=1" class="product-remove">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                             <span class="remove">Remove</span>
 
                         </button>
-    
-                        <button x-on:click="LpTotal += 179.99" class="product-remove">
+
+                        <button x-on:click="LpTotal += 179.99; Lpqty+=1" class="product-remove">
                             <i class="fa-solid fa-plus" aria-hidden="true"></i>
                             <span class="remove">Add</span>
 
                         </button>
-                        </p>
+                        <h4> <span x-text="Lpqty"></span></h4>
                     </div>
                 </div>
-
-                <div class="cart-item">
-                    <img src="" alt="">
-                    <div class="product-info">
-                        <h3 class="product-name">Medium Pizza</h3>
-                        <span x-text="MlTotal" class="product-price">R129.00</span>
-                        <p>Qnt: <input class="product-quantity" value="1" name="">
-                        <button x-on:click="MlTotal -= 129.99" class="product-remove">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                            <span class="remove">Remove</span>
-
-                        </button>
-                        <button x-on:click="MlTotal += 129.99" class="product-remove">
-                            <i class="fa-solid fa-plus" aria-hidden="true"></i>
-                            <span class="remove">Add</span>
-
-                        </button>
-
-                        </p>
-                    </div>
-                </div>
-
-                <div class="cart-item">
-                    <img src="" alt="">
-                    <div class="product-info">
-                        <h3 class="product-name">Small Pizza</h3>
-                        <span x-text="SlTotal" class="product-price">R 129.00</span>
-                        <p>Qnt: <input class="product-quantity" value="1" name="">
-                        <button x-on:click="SlTotal -= 79.99"class="product-remove">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                            <span class="remove">Remove</span>
-
-                        </button>
-                        <button x-on:click="SlTotal += 79.99" class="product-remove">
-                            <i class="fa-solid fa-plus" aria-hidden="true"></i>
-                            <span class="remove">Add</span>
-
-                        </button>
-                        </p>
-                    </div>
-                </div>
-
             </div>
-            <div x-text="CartTotal" class="subtotal">Subtotal: R0.00</div>
-            <div class="check-out">Payment</div>
-            <div class="view-cart">View Cart</div>
+
+            <div class="cart-item">
+                <img src="" alt="">
+                <div class="product-info">
+                    <h3 class="product-name">Medium Pizza</h3>
+                    <h4> <span x-text="MlTotal" class="product-price">R129.00</span></h4>
+                    <!-- <p>Qnt: <input class="product-quantity" value="1" name=""> -->
+                    <button x-on:click="MlTotal -= 129.99; Mpqty-=1" class="product-remove">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                        <span class="remove">Remove</span>
+
+                    </button>
+                    <button x-on:click="MlTotal += 129.99;  Mpqty+=1" class="product-remove">
+                        <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                        <span class="remove">Add</span>
+
+                    </button>
+                    <h4><span x-text="Mpqty"></span></h4>
+
+                    </p>
+                </div>
+            </div>
+
+            <div class="cart-item">
+                <img src="" alt="">
+                <div class="product-info">
+                    <h3 class="product-name">Small Pizza</h3>
+                    <h4> <span x-text="SlTotal" class="product-price">R 129.00</span></h4>
+                    <br><!-- <p>Qnt: <input class="product-quantity" value="1" name=""> -->
+                    <button x-on:click="SlTotal -= 79.99; Spqty-=1" class="product-remove">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                        <span class="remove">Remove</span>
+
+                    </button>
+                    <button x-on:click="SlTotal += 79.99;  Spqty+=1" class="product-remove">
+                        <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                        <span class="remove">Add</span>
+
+                    </button>
+                   
+                    
+                 
+                    <h4> <span x-text="Spqty"></span></h4>
+                    </p>
+                    <div class="check-out">Proceed to Payment</div>
+                    <h4>
+                
+                        <div x-text="(LpTotal +  MlTotal + SlTotal)" class="subtotal">Amount Due: R0.00</div>
+                        
+                    </h4>
+                    <input id="pay" x-text="pay" type="text" placeholder="Amount" inputmode="numeric" pattern="\d*">
+                    <span>
+                        <template id="total" x-if="(LpTotal +  MlTotal + SlTotal) == value">
+                            <div> Payment Accepted</div>
+                        </template>
+                        
+                        <template x-else-if="value > (LpTotal +  MlTotal + SlTotal)">
+                            <div>Please Enter a Correct Amount</div>
+                        </template>
+                        
+                        <template x-else>
+                            <div>Insuffient Amount</div>
+                        </template>
+                    </span>
+
+                </div>
+            </div>
+
         </div>
+        
+        
+        
+        <input class="view-cart" type="button" value="View Cart" onClick="window.location.reload()"> 
+
+       
+    </div>
     </div>
 </header>
 
@@ -100,15 +146,16 @@
 <body>
 
 
-    <div class="container" >
+    <div class="container">
         <div id="myDIV" class="pizza-block">
             <div class="pizza pizza-fill">
                 <div><img class="med-img" src="pizza-size.png" alt=""></div> <strong>Medium
                     Pizza</strong><br><br><strong>R98.99</strong><br><br>large margeritha pizza with 3 toppings
                 max. 3 meat toppings max. 3 or less other toppings. <br> <br> <img align="right" class="toppings"
                     src="coca_cola_PNG8913.png" alt="">
-                <div class="promo">FREE 2l Diet Coke.</div> <br> 
-                <button class="cart-icon"><a href="#" x-on:click="ShowCart=true"><i class="fa-solid fa-basket-shopping fa-4x "></i></button></a>
+                <div class="promo">FREE 2l Diet Coke.</div> <br>
+                <button class="cart-icon"><a href="#" x-on:click="ShowCart=true"><i
+                            class="fa-solid fa-basket-shopping fa-4x "></i></button></a>
             </div>
 
             <div class="pizza pizza-fill">
@@ -116,8 +163,9 @@
                     Pizza</strong><br><br><strong>R148.99</strong><br><br>large margeritha pizza with 3 toppings
                 max. 3 meat toppings max. 3 or less other toppings. <br> <br> <img align="right" class="toppings"
                     src="coca_cola_PNG8913.png" alt="">
-                <div class="promo">FREE 2l Diet Coke.</div> <br> 
-                <button class="cart-icon"><a href="#" x-on:click="ShowCart=true"><i class="fa-solid fa-basket-shopping fa-4x "></i></button></a>
+                <div class="promo">FREE 2l Diet Coke.</div> <br>
+                <button class="cart-icon"><a href="#" x-on:click="ShowCart=true"><i
+                            class="fa-solid fa-basket-shopping fa-4x "></i></button></a>
             </div>
 
             <div class="pizza pizza-fill">
@@ -126,8 +174,9 @@
                     Pizza </strong><br><br><strong>R78.99</strong><br><br>large margeritha pizza with 3 toppings
                 mall pizza with 3 toppings 1 meat topping. 3 or less other toppings. <br> <br> <br> <img align="right"
                     class="toppings" src="coca_cola_PNG8913.png" alt="">
-                <div class="promo">FREE 440ml Diet Coke.</div> <br> 
-                <button x-on:click="SlTotal += 79.99" class="cart-icon"><a href="#" ><i class="fa-solid fa-basket-shopping fa-4x "></i></button></a>
+                <div class="promo">FREE 440ml Diet Coke.</div> <br>
+                <button x-on:click="SlTotal += 79.99;  Spqty+=1" class="cart-icon"><a href="#"><i
+                            class="fa-solid fa-basket-shopping fa-4x "></i></button></a>
 
             </div>
         </div>
